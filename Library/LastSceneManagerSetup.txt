@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Prototype/Test Player Controller Setup.unity
+- path: Assets/Prototype/Enemy Controller Setup.unity
   isLoaded: 1
   isActive: 1
