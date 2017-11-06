@@ -1,0 +1,272 @@
+fileFormatVersion: 2
+guid: e2a12b88f8ab5bf4393caac21c439b94
+timeCreated: 1509884565
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SNES - Battletoads and Double Dragon - Battle Toads_0
+    21300002: SNES - Battletoads and Double Dragon - Battle Toads_1
+    21300004: SNES - Battletoads and Double Dragon - Battle Toads_2
+    21300006: SNES - Battletoads and Double Dragon - Battle Toads_3
+    21300008: SNES - Battletoads and Double Dragon - Battle Toads_4
+    21300010: SNES - Battletoads and Double Dragon - Battle Toads_5
+    21300012: SNES - Battletoads and Double Dragon - Battle Toads_6
+    21300014: SNES - Battletoads and Double Dragon - Battle Toads_7
+    21300016: SNES - Battletoads and Double Dragon - Battle Toads_8
+    21300018: SNES - Battletoads and Double Dragon - Battle Toads_9
+    21300020: SNES - Battletoads and Double Dragon - Battle Toads_10
+    21300022: SNES - Battletoads and Double Dragon - Battle Toads_11
+    21300024: SNES - Battletoads and Double Dragon - Battle Toads_12
+    21300026: SNES - Battletoads and Double Dragon - Battle Toads_13
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_0
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 41
+        width: 314
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 915
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_2
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 916
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_3
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 913
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_4
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 915
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 915
+        width: 32
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_6
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 912
+        width: 47
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_7
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 916
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 918
+        width: 36
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_9
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 911
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_10
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 915
+        width: 31
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_11
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 915
+        width: 46
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_12
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 915
+        width: 54
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SNES - Battletoads and Double Dragon - Battle Toads_13
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 835
+        width: 48
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
