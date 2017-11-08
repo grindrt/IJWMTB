@@ -78,6 +78,7 @@ public class PlayerBehaviourScript : MonoBehaviour
 
 		var xMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
 		var xMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
+		Debug.LogFormat("Z position: {0}", _rigidbody.position.z);
 		_rigidbody.position = new Vector3(
 				Mathf.Clamp(_rigidbody.position.x, xMin + 1, xMax - 1),
 				_rigidbody.position.y, 
