@@ -11,7 +11,7 @@ public class EnemyBehaviourScript : MonoBehaviour
 	public float ZMin;
 
 	private Rigidbody _rigidbody;
-	private Animator _animator;
+	//private Animator _animator;
 	private Transform _groundCheckTransform;
 	private Transform _target;
 	private bool _onGround;
@@ -27,7 +27,7 @@ public class EnemyBehaviourScript : MonoBehaviour
 	void Start ()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
-		_animator = GetComponent<Animator>();
+		//_animator = GetComponent<Animator>();
 		_groundCheckTransform = gameObject.transform.Find("GroundCheck");
 		_target = FindObjectOfType<PlayerBehaviourScript>().transform;
 		//_currentSpeed = MaxSpeed;
@@ -39,8 +39,8 @@ public class EnemyBehaviourScript : MonoBehaviour
 
 		_onGround = Physics.Linecast(transform.position, _groundCheckTransform.position, 1 << LayerMask.NameToLayer("Ground"));
 
-		_animator.SetBool("OnGround", _onGround);
-		_animator.SetBool("IsDead", _isDead);
+		//_animator.SetBool("OnGround", _onGround);
+		//_animator.SetBool("IsDead", _isDead);
 		
 		_isRight = _target.position.x >= transform.position.x;
 
@@ -69,7 +69,7 @@ public class EnemyBehaviourScript : MonoBehaviour
 
 			_rigidbody.velocity = new Vector3(xForce * _currentSpeed, 0, _zForce * _currentSpeed);
 
-			_animator.SetFloat("Speed", Mathf.Abs(_currentSpeed));
+			//_animator.SetFloat("Speed", Mathf.Abs(_currentSpeed));
 		}
 
 		_rigidbody.position = new Vector3(

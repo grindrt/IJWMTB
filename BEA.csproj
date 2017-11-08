@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\EnemyBehaviourScript.cs" />
+    <Compile Include="Assets\Scripts\JackController.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
