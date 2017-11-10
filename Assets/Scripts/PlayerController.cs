@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
 	public float JumpForce = 400;
 	public float ZMax;
 	public float ZMin;
+	public int MaxHealth = 100;
 
 	//public GameObject AttackBox;
 	//public Sprite AttackSprite;
 
 	private Rigidbody _rigidbody;
 	private Animator _animator;
+	private UIController _ui;
 	//private Transform _groundCheck;
 	//private SpriteRenderer _currentSpriteRenderer;
 
@@ -26,20 +28,25 @@ public class PlayerController : MonoBehaviour
 	private bool _canMove = true;
 	private bool _jump;
 	private bool _isBlocking;
+	private float _blockRatio = 1;
 
 	private int _groundLayerMask;
+	private int _currentHealth;
 
 	// Use this for initialization
 	void Start ()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_animator = GetComponent<Animator>();
+		_ui = FindObjectOfType<UIController>();
 		//_currentSpriteRenderer = GetComponent<SpriteRenderer>();
 		//_groundCheck = gameObject.transform.Find("GroundCheck");
 
 		_currentSpeed = MaxSpeed;
 
 		_groundLayerMask = LayerMask.NameToLayer("Ground");
+
+		_currentHealth = MaxHealth;
 	}
 
 	// Update is called once per frame
@@ -74,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
 		_isBlocking = Input.GetKey(KeyCode.LeftAlt);
 		_animator.SetBool("Block", _isBlocking);
+		_blockRatio = _isBlocking ? 0.25f : 1;
 
 		if ((x > 0 && !_facingRight && _canMove) || (x < 0 && _facingRight && _canMove))
 		{
@@ -134,14 +142,15 @@ public class PlayerController : MonoBehaviour
 		if (_isDead) return;
 
 		//_damaged = true;
-		//_currentHealth -= damage;
+		_currentHealth -= Mathf.RoundToInt(damage * _blockRatio);
+		_ui.UpdateHealthBar(_currentHealth);
 
 		_animator.SetTrigger("HitDamage");
 
-		//if (_currentHealth <= 0)
-		//{
-		//	_isDead = true;
-		//	_rigidbody.AddRelativeForce(new Vector3(3, 5, 0), ForceMode.Impulse);
-		//}
+		if (_currentHealth <= 0)
+		{
+			_isDead = true;
+			_rigidbody.AddRelativeForce(new Vector3(3, 5, 0), ForceMode.Impulse);
+		}
 	}
 }
