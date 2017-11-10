@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using Timer = System.Timers.Timer;
 
-public class EnemyBehaviourScript : MonoBehaviour
+public class EnemyBehaviourScriptOld : MonoBehaviour
 {
 	public float MaxSpeed;
 	public float ZMax;
@@ -29,7 +29,7 @@ public class EnemyBehaviourScript : MonoBehaviour
 		_rigidbody = GetComponent<Rigidbody>();
 		//_animator = GetComponent<Animator>();
 		_groundCheckTransform = gameObject.transform.Find("GroundCheck");
-		_target = FindObjectOfType<PlayerBehaviourScript>().transform;
+		_target = FindObjectOfType<PlayerController>().transform;
 		//_currentSpeed = MaxSpeed;
 
 	}

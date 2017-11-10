@@ -1,135 +1,147 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float WalkMovementSpeed;
-	public float AttackMovementSpeed;
-	public float XMin, XMax, ZMin, ZMax;
-	public float KnockBackForce;
-	public float FallTime;
-	public GameObject AttackGameObject;
-	public Sprite AttackSpriteFrame;
-	
+	public float MaxSpeed = 8;
+	public float JumpForce = 400;
+	public float ZMax;
+	public float ZMin;
+
+	//public GameObject AttackBox;
+	//public Sprite AttackSprite;
+
 	private Rigidbody _rigidbody;
 	private Animator _animator;
-	private AnimatorStateInfo _currentStateInfo;
-	private SpriteRenderer _currentSpriteRenderer;
+	//private Transform _groundCheck;
+	//private SpriteRenderer _currentSpriteRenderer;
 
-	private float _movementSpeed;
-	private bool _isBlocking;
+	private float _currentSpeed;
+
+	private bool _onGround;
+	private bool _isDead;
+	private bool _facingRight = true;
 	private bool _canMove = true;
-	private bool _isRight = true;
+	private bool _jump;
+	private bool _isBlocking;
 
-	private static int _currentState;
-	private static readonly int IdleState = Animator.StringToHash("Base Layer.Idle");
-	private static readonly int WalkState = Animator.StringToHash("Base Layer.Walk");
-	private static readonly int JumpState = Animator.StringToHash("Base Layer.Jump");
-	private static readonly int AttackState = Animator.StringToHash("Base Layer.Attack");
-	private static readonly int DamagedState = Animator.StringToHash("Base Layer.Damaged");
-	private static readonly int BlockState = Animator.StringToHash("Base Layer.Block");
-	private static readonly int FallState = Animator.StringToHash("Base Layer.Fall");
-	private static readonly int ShootState = Animator.StringToHash("Base Layer.Shoot");
+	private int _groundLayerMask;
 
 	// Use this for initialization
-	void Start()
+	void Start ()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_animator = GetComponent<Animator>();
-		_currentSpriteRenderer = GetComponent<SpriteRenderer>();
-		_movementSpeed = WalkMovementSpeed;
+		//_currentSpriteRenderer = GetComponent<SpriteRenderer>();
+		//_groundCheck = gameObject.transform.Find("GroundCheck");
+
+		_currentSpeed = MaxSpeed;
+
+		_groundLayerMask = LayerMask.NameToLayer("Ground");
 	}
 
 	// Update is called once per frame
-	void Update()
+	void Update ()
 	{
-		_currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-		_currentState = _currentStateInfo.fullPathHash;
+		_animator.SetBool("OnGround", _onGround);
+		_animator.SetBool("IsDead", _isDead);
 
-		_movementSpeed = _currentState == IdleState || _currentState == WalkState
-			? WalkMovementSpeed
-			: AttackMovementSpeed;
+		_jump = Input.GetButtonDown("Jump") && _onGround;
+
+		//_animator.SetBool("IsAttack", Input.GetButtonDown("Fire1"));
+
+		if (Input.GetButtonDown("Fire1"))
+		{
+			_animator.SetTrigger("Attack");
+		}
 	}
 
 	void FixedUpdate()
 	{
-		float mHorizontal = Input.GetAxis("Horizontal"); // A D
-		float mVertical = Input.GetAxis("Vertical"); // W S
+		if (_isDead) return;
 
-		var movement = new Vector3(mHorizontal, 0.0f, mVertical);
+		float x = Input.GetAxis("Horizontal");
+		float z = _onGround ? Input.GetAxis("Vertical") : 0;
+		
+		_rigidbody.velocity = new Vector3(x * _currentSpeed, _rigidbody.velocity.y, z * _currentSpeed);
 
-		_rigidbody.velocity = movement * _movementSpeed;
+		if (_onGround)
+		{
+			_animator.SetFloat("Speed", Mathf.Abs(_rigidbody.velocity.magnitude));
+		}
+
+		_isBlocking = Input.GetKey(KeyCode.LeftAlt);
+		_animator.SetBool("Block", _isBlocking);
+
+		if ((x > 0 && !_facingRight && _canMove) || (x < 0 && _facingRight && _canMove))
+		{
+			Flip();
+		}
+
+		if (_jump)
+		{
+			_jump = false;
+			_rigidbody.AddForce(Vector3.up * JumpForce);
+		}
+
+		var xMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
+		var xMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
 		_rigidbody.position = new Vector3(
-			Mathf.Clamp(_rigidbody.position.x, XMin, XMax),
-			transform.position.y,
+			Mathf.Clamp(_rigidbody.position.x, xMin + 1, xMax - 1),
+			_rigidbody.position.y,
 			Mathf.Clamp(_rigidbody.position.z, ZMin, ZMax)
 		);
+	}
 
-		if ((mHorizontal > 0 && !_isRight && _canMove) || (mHorizontal < 0 && _isRight && _canMove))
+	void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.layer == _groundLayerMask && !_onGround)
 		{
-			FLip();
+			_onGround = true;
 		}
+	}
 
-		_animator.SetFloat("Speed", _rigidbody.velocity.sqrMagnitude);
-
-		Attack();
-
-		Block();
-
-		// Hit by Q button
-		if (Input.GetKeyDown(KeyCode.Q))
+	void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.layer == _groundLayerMask && _onGround)
 		{
-			_animator.SetBool("IsDamaged", true);
+			_onGround = false;
 		}
-		else
-		{
-			_animator.SetBool("IsDamaged", false);
-		}
-
-		//Fall by E button
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			StartCoroutine(FallCorountine());
-		} 
 	}
 
-	private void Block()
+	private void Flip()
 	{
-		_isBlocking = Input.GetKey(KeyCode.X);
-		_animator.SetBool("Block", _isBlocking);
-	}
-
-	private void Attack()
-	{
-		bool attack = Input.GetButtonDown("Fire1");
-		_animator.SetBool("IsAttack", attack);
-
-		AttackGameObject.SetActive(AttackSpriteFrame == _currentSpriteRenderer.sprite);
-	}
-
-	private IEnumerator FallCorountine()
-	{
-		_animator.Play("Fall");
-		_canMove = false;
-
-		if (_isRight)
-			_rigidbody.AddForce(transform.right * (-1 * KnockBackForce));
-		else
-			_rigidbody.AddForce(transform.right * KnockBackForce);
-		
-		yield return new WaitForSeconds(FallTime);
-
-		_animator.Play("Idle");
-		_canMove = true;
-	}
-
-	private void FLip()
-	{
-		_isRight = !_isRight;
+		_facingRight = !_facingRight;
 		var scale = transform.localScale;
 		scale.x *= -1;
 		transform.localScale = scale;
+	}
+
+	void ResetSpeed()
+	{
+		_currentSpeed = MaxSpeed;
+	}
+
+	void SpeedToZero()
+	{
+		_currentSpeed = 0;
+	}
+
+	public void TookDamage(int damage)
+	{
+		if (_isDead) return;
+
+		//_damaged = true;
+		//_currentHealth -= damage;
+
+		_animator.SetTrigger("HitDamage");
+
+		//if (_currentHealth <= 0)
+		//{
+		//	_isDead = true;
+		//	_rigidbody.AddRelativeForce(new Vector3(3, 5, 0), ForceMode.Impulse);
+		//}
 	}
 }
