@@ -11,11 +11,13 @@ public class CameraFollow : MonoBehaviour
 	public Vector2 minXY;
 
 	private Transform _player;
+	public float defaultX;
 
 	// Use this for initialization
 	void Awake()
 	{
 		_player = GameObject.FindGameObjectWithTag("Player").transform;
+		defaultX = maxXY.x;
 	}
 
 	private bool CheckXMArgin()

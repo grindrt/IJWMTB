@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -79,8 +80,6 @@ public class EnemyController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (_isDead) return;
-
 		if (!_isDead)
 		{
 			var targetDistance = _target.position - transform.position;
@@ -112,7 +111,6 @@ public class EnemyController : MonoBehaviour
 			}
 			else
 			{
-				_animator.SetBool("IsAttack", false);
 				_currentSpeed = MaxSpeed;
 			}
 
@@ -164,10 +162,19 @@ public class EnemyController : MonoBehaviour
 		{
 			_isDead = true;
 			_rigidbody.AddRelativeForce(new Vector3(3,5,0), ForceMode.Impulse);
+
+			DestroyAfterAnimation();
 		}
 	}
 
-	public void EraseEnemy()
+	private void DestroyAfterAnimation()
+	{
+		RuntimeAnimatorController ac = _animator.runtimeAnimatorController;
+		float time = 0.5f + ac.animationClips.Where(clip => clip.name == "Dead").Sum(clip => clip.length);
+		Destroy(gameObject, time);
+	}
+
+	public void Die()
 	{
 		gameObject.SetActive(false);
 	}
