@@ -161,7 +161,7 @@ public class EnemyController : MonoBehaviour
 		if (_currentHealth <= 0)
 		{
 			_isDead = true;
-			_rigidbody.AddRelativeForce(new Vector3(3,5,0), ForceMode.Impulse);
+			_rigidbody.AddRelativeForce(new Vector3(1,2,0), ForceMode.Impulse);
 
 			DestroyAfterAnimation();
 		}

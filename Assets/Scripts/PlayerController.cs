@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	public float JumpForce = 400;
 	public float ZMax;
 	public float ZMin;
+	public float XMin;
 	public int MaxHealth = 100;
 
 	//public GameObject AttackBox;
@@ -94,8 +95,8 @@ public class PlayerController : MonoBehaviour
 			_rigidbody.AddForce(Vector3.up * JumpForce);
 		}
 
-		var xMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x;
-		var xMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x;
+		var xMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x - 0.7f;
+		var xMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x + 0.7f;
 		_rigidbody.position = new Vector3(
 			Mathf.Clamp(_rigidbody.position.x, xMin + 1, xMax - 1),
 			_rigidbody.position.y,
