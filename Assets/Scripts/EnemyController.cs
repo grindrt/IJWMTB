@@ -104,13 +104,14 @@ public class EnemyController : MonoBehaviour
 
 			if (Mathf.Abs(targetDistance.x) < 1.5f && Mathf.Abs(targetDistance.z) < 1.5f && Time.time > _nextAttack)
 			{
-				//_animator.SetBool("IsAttack", true);
+				_animator.SetBool("IsAttack", true);
 				_animator.SetTrigger("Attack");
 				_currentSpeed = 0;
 				_nextAttack = Time.time + AttackRate;
 			}
 			else
 			{
+				_animator.SetBool("IsAttack", false);
 				_currentSpeed = MaxSpeed;
 			}
 
