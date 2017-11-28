@@ -91,6 +91,7 @@
   <ItemGroup>
     <None Include="Assets\Audio\BeatEmAll\Read Me!.txt" />
     <None Include="Assets\Audio\Synthwave (free)\README.txt" />
+    <None Include="Assets\Audio\retroattacksoundlite\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

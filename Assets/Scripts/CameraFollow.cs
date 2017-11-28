@@ -42,6 +42,7 @@ public class CameraFollow : MonoBehaviour
 		}
 
 		targetX = Mathf.Clamp(targetX, minXY.x, maxXY.x);
+		targetX = targetX <= 43.8f ? targetX : 43.8f;
 
 		transform.position= new Vector3(targetX, transform.position.y, transform.position.z);
 	}
