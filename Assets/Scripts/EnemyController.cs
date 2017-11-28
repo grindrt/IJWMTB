@@ -13,10 +13,13 @@ public class EnemyController : MonoBehaviour
 	public int MaxHealth;
 	public float AttackRate = 1f;
 
+	public AudioClip[] punces, deathes, damaged;
+
 	//public GameObject AttackBox;
 	//public GameObject HitBox;
 	//public Sprite AttackSprite;
 
+	private AudioSource _audioSource;
 	private Rigidbody _rigidbody;
 	private Animator _animator;
 	//private Transform _groundCheck;
@@ -44,6 +47,7 @@ public class EnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		_audioSource = GetComponent<AudioSource>();
 		_rigidbody = GetComponent<Rigidbody>();
 		_animator = GetComponent<Animator>();
 		//_currentSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -104,6 +108,8 @@ public class EnemyController : MonoBehaviour
 
 			if (Mathf.Abs(targetDistance.x) < 1.5f && Mathf.Abs(targetDistance.z) < 1.5f && Time.time > _nextAttack)
 			{
+				var attackAudio = punces[Random.Range(0, punces.Length - 1)];
+				PlayAudioClip(attackAudio);
 				_animator.SetBool("IsAttack", true);
 				_animator.SetTrigger("Attack");
 				_currentSpeed = 0;
@@ -159,10 +165,15 @@ public class EnemyController : MonoBehaviour
 
 		_animator.SetTrigger("HitDamage");
 
+		var damageClip = damaged[Random.Range(0, damaged.Length-1)];
+		PlayAudioClip(damageClip);
+
 		if (_currentHealth <= 0)
 		{
 			_isDead = true;
 			_rigidbody.AddRelativeForce(new Vector3(1,2,0), ForceMode.Impulse);
+			var deathClip = deathes[Random.Range(0, deathes.Length-1)];
+			PlayAudioClip(deathClip);
 
 			DestroyAfterAnimation();
 		}
@@ -178,5 +189,11 @@ public class EnemyController : MonoBehaviour
 	public void Die()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public void PlayAudioClip(AudioClip clip)
+	{
+		_audioSource.clip = clip;
+		_audioSource.Play();
 	}
 }

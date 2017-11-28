@@ -43,13 +43,14 @@ GameObject:
   - component: {fileID: 54684267429721280}
   - component: {fileID: 95486876118895766}
   - component: {fileID: 114577465115943894}
+  - component: {fileID: 82947137930486332}
   m_Layer: 11
   m_Name: Enemy_test 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1574530395545494
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +256,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82947137930486332
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1435285214266560}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95486876118895766
 Animator:
   serializedVersion: 3
@@ -289,6 +370,20 @@ MonoBehaviour:
   DamageTime: 0.5
   MaxHealth: 100
   AttackRate: 1
+  punces:
+  - {fileID: 8300000, guid: 6f99f23011bae734298459c8e3696c1c, type: 3}
+  - {fileID: 8300000, guid: e85aa8862a9756641aa01e38fbc952ce, type: 3}
+  - {fileID: 8300000, guid: 0c059c5ad43cd4c4faea2624822b2e6d, type: 3}
+  deathes:
+  - {fileID: 8300000, guid: 38838f240acccb64686a57f897b19f6d, type: 3}
+  - {fileID: 8300000, guid: 92618fe966302ed4891291f7d0885cf1, type: 3}
+  - {fileID: 8300000, guid: 4c8d59a488d24c341aa2b7ce61d6591a, type: 3}
+  - {fileID: 8300000, guid: 864f09460be915d469420a462eb432fa, type: 3}
+  - {fileID: 8300000, guid: b3ae19d3ab92b904c9071638c9b65e6b, type: 3}
+  - {fileID: 8300000, guid: b609e6e269cd1c841ae9fb606ce774c4, type: 3}
+  damaged:
+  - {fileID: 8300000, guid: c439006a7f3cff94ebe54ea7b5e0c993, type: 3}
+  - {fileID: 8300000, guid: d3c1d041e5722b8438e8927b42cab365, type: 3}
 --- !u!114 &114826526944889400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +441,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: df119f939c8ffd84ebea613f2414b64e, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 4651a21893f7f1e42b69b9506c4c4fbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
