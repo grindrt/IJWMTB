@@ -12,9 +12,12 @@ public class PlayerController : MonoBehaviour
 	public float XMin;
 	public int MaxHealth = 100;
 
+	public AudioClip[] punces, deathes;
+
 	//public GameObject AttackBox;
 	//public Sprite AttackSprite;
 
+	private AudioSource _audioSource;
 	private Rigidbody _rigidbody;
 	private Animator _animator;
 	private UIController _ui;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		_audioSource = GetComponent<AudioSource>();
 		_rigidbody = GetComponent<Rigidbody>();
 		_animator = GetComponent<Animator>();
 		_ui = FindObjectOfType<UIController>();
@@ -62,6 +66,8 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetButtonDown("Fire1"))
 		{
+			var attackAudio = punces[Random.Range(0, punces.Length-1)];
+			PlayAudioClip(attackAudio);
 			_animator.SetTrigger("Attack");
 		}
 	}
@@ -97,6 +103,9 @@ public class PlayerController : MonoBehaviour
 
 		var xMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10)).x - 0.7f;
 		var xMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 10)).x + 0.7f;
+
+
+
 		_rigidbody.position = new Vector3(
 			Mathf.Clamp(_rigidbody.position.x, xMin + 1, xMax - 1),
 			_rigidbody.position.y,
@@ -153,5 +162,11 @@ public class PlayerController : MonoBehaviour
 			_isDead = true;
 			_rigidbody.AddRelativeForce(new Vector3(3, 5, 0), ForceMode.Impulse);
 		}
+	}
+
+	public void PlayAudioClip(AudioClip clip)
+	{
+		_audioSource.clip = clip;
+		_audioSource.Play();
 	}
 }

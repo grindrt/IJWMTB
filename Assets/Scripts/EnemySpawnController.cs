@@ -46,10 +46,10 @@ public class EnemySpawnController : MonoBehaviour
 
 	private void SpawnEnemy()
 	{
-		var spawnForward = Random.Range(0, 5) == 0;
+		var spawnForward = Random.Range(0, 2) == 0;
 		var x = spawnForward ? transform.position.x + 3 : transform.position.x - 3;
 		var z = Random.Range(ZMin, ZMax);
-		var spawnPosition = new Vector3(x, 0, z);
+		var spawnPosition = new Vector3(x, 0.434f, z);
 
 		Instantiate(Enemies[Random.Range(0, Enemies.Length)], spawnPosition, Quaternion.identity);
 		_currentEnemiesCount++;

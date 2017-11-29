@@ -13,10 +13,13 @@ public class EnemyController : MonoBehaviour
 	public int MaxHealth;
 	public float AttackRate = 1f;
 
+	public AudioClip[] punces, deathes, damaged;
+
 	//public GameObject AttackBox;
 	//public GameObject HitBox;
 	//public Sprite AttackSprite;
 
+	private AudioSource _audioSource;
 	private Rigidbody _rigidbody;
 	private Animator _animator;
 	//private Transform _groundCheck;
@@ -34,7 +37,7 @@ public class EnemyController : MonoBehaviour
 
 	private bool _onGround;
 	private bool _isDead;
-	private bool _facingRight;
+	public bool _facingRight = true;
 	private bool _canMove = true;
 	private bool _jump;
 	private bool _damaged;
@@ -44,6 +47,7 @@ public class EnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		_audioSource = GetComponent<AudioSource>();
 		_rigidbody = GetComponent<Rigidbody>();
 		_animator = GetComponent<Animator>();
 		//_currentSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -62,7 +66,7 @@ public class EnemyController : MonoBehaviour
 		_animator.SetBool("OnGround", _onGround);
 		_animator.SetBool("IsDead", _isDead);
 
-		_facingRight = _target.position.x > transform.position.x;
+		_facingRight = _target.position.x < transform.position.x;
 		transform.eulerAngles = new Vector3(0, _facingRight ? 180 : 0, 0);
 
 		if (_damaged && !_isDead)
@@ -91,7 +95,7 @@ public class EnemyController : MonoBehaviour
 				_walkTimer = 0;
 			}
 
-			if (Mathf.Abs(targetDistance.x) < 1.5f)
+			if (Mathf.Abs(targetDistance.x) < 0.5f)
 			{
 				xForce = 0;
 			}
@@ -102,12 +106,17 @@ public class EnemyController : MonoBehaviour
 			}
 			_animator.SetFloat("Speed", Mathf.Abs(_currentSpeed));
 
-			if (Mathf.Abs(targetDistance.x) < 1.5f && Mathf.Abs(targetDistance.z) < 1.5f && Time.time > _nextAttack)
+			if (Mathf.Abs(targetDistance.x) < 0.5f && Mathf.Abs(targetDistance.z) < 0.5f && Time.time > _nextAttack)
 			{
 				_animator.SetBool("IsAttack", true);
 				_animator.SetTrigger("Attack");
 				_currentSpeed = 0;
 				_nextAttack = Time.time + AttackRate;
+				if (_animator.GetBool("IsAttack"))
+				{
+					var attackAudio = punces[Random.Range(0, punces.Length - 1)];
+					PlayAudioClip(attackAudio);
+				}
 			}
 			else
 			{
@@ -159,10 +168,15 @@ public class EnemyController : MonoBehaviour
 
 		_animator.SetTrigger("HitDamage");
 
+		var damageClip = damaged[Random.Range(0, damaged.Length-1)];
+		PlayAudioClip(damageClip);
+
 		if (_currentHealth <= 0)
 		{
 			_isDead = true;
-			_rigidbody.AddRelativeForce(new Vector3(1,2,0), ForceMode.Impulse);
+			_rigidbody.AddRelativeForce(new Vector3(-1,2,0), ForceMode.Impulse);
+			var deathClip = deathes[Random.Range(0, deathes.Length-1)];
+			PlayAudioClip(deathClip);
 
 			DestroyAfterAnimation();
 		}
@@ -178,5 +192,11 @@ public class EnemyController : MonoBehaviour
 	public void Die()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public void PlayAudioClip(AudioClip clip)
+	{
+		_audioSource.clip = clip;
+		_audioSource.Play();
 	}
 }
