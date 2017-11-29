@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 33719264493742148}
   - component: {fileID: 65961167190421296}
   - component: {fileID: 23419308898075478}
+  - component: {fileID: 114376921875219906}
   m_Layer: 12
   m_Name: AttackBox
   m_TagString: Untagged
@@ -154,7 +155,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -240,6 +241,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114376921875219906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817049224699280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04165f116e5bbf24ead5c06b80a56153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 25
 --- !u!114 &114726699686818452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +284,7 @@ MonoBehaviour:
   damaged:
   - {fileID: 8300000, guid: c439006a7f3cff94ebe54ea7b5e0c993, type: 3}
   - {fileID: 8300000, guid: d3c1d041e5722b8438e8927b42cab365, type: 3}
+  _facingRight: 0
 --- !u!136 &136990924049077208
 CapsuleCollider:
   m_ObjectHideFlags: 1

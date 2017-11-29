@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
 
 	private bool _onGround;
 	private bool _isDead;
-	private bool _facingRight;
+	public bool _facingRight = true;
 	private bool _canMove = true;
 	private bool _jump;
 	private bool _damaged;
@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
 		_animator.SetBool("OnGround", _onGround);
 		_animator.SetBool("IsDead", _isDead);
 
-		_facingRight = _target.position.x > transform.position.x;
+		_facingRight = _target.position.x < transform.position.x;
 		transform.eulerAngles = new Vector3(0, _facingRight ? 180 : 0, 0);
 
 		if (_damaged && !_isDead)
@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
 				_walkTimer = 0;
 			}
 
-			if (Mathf.Abs(targetDistance.x) < 1.5f)
+			if (Mathf.Abs(targetDistance.x) < 0.5f)
 			{
 				xForce = 0;
 			}
@@ -106,14 +106,17 @@ public class EnemyController : MonoBehaviour
 			}
 			_animator.SetFloat("Speed", Mathf.Abs(_currentSpeed));
 
-			if (Mathf.Abs(targetDistance.x) < 1.5f && Mathf.Abs(targetDistance.z) < 1.5f && Time.time > _nextAttack)
+			if (Mathf.Abs(targetDistance.x) < 0.5f && Mathf.Abs(targetDistance.z) < 0.5f && Time.time > _nextAttack)
 			{
-				var attackAudio = punces[Random.Range(0, punces.Length - 1)];
-				PlayAudioClip(attackAudio);
 				_animator.SetBool("IsAttack", true);
 				_animator.SetTrigger("Attack");
 				_currentSpeed = 0;
 				_nextAttack = Time.time + AttackRate;
+				if (_animator.GetBool("IsAttack"))
+				{
+					var attackAudio = punces[Random.Range(0, punces.Length - 1)];
+					PlayAudioClip(attackAudio);
+				}
 			}
 			else
 			{
@@ -171,7 +174,7 @@ public class EnemyController : MonoBehaviour
 		if (_currentHealth <= 0)
 		{
 			_isDead = true;
-			_rigidbody.AddRelativeForce(new Vector3(1,2,0), ForceMode.Impulse);
+			_rigidbody.AddRelativeForce(new Vector3(-1,2,0), ForceMode.Impulse);
 			var deathClip = deathes[Random.Range(0, deathes.Length-1)];
 			PlayAudioClip(deathClip);
 
